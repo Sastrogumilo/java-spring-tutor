@@ -1,0 +1,16 @@
+{
+  "name": "springboot_test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start-local": "pm2-dev start ./gradlew --interpreter bash -- bootRun && pm2 logs",
+    "start-prod": "pm2 start ./gradlew --watch --name 'springboot_test' --interpreter bash -- bootRun && pm2 logs"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "pm2": "^5.3.0"
+  }
+}
