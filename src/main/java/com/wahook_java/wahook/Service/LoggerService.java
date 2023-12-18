@@ -12,6 +12,9 @@ import org.springframework.beans.factory.annotation.Value;
 // import static serilogj.sinks.coloredconsole.ColoredConsoleSinkConfigurator.*;
 import static serilogj.sinks.seq.SeqSinkConfigurator.*;
 
+//Ndak bisa Dari serilogj sendiri private static, jadinya Confignya dari sini
+//bukan di folder config
+
 @Service
 public class LoggerService {
     
@@ -27,12 +30,16 @@ public class LoggerService {
     @Value("${appname}")
     private String appname;
 
+    public LoggerService() {
+        Log .setLogger(new LoggerConfiguration()
+            // .writeTo(coloredConsole())
+            .writeTo(seq(matadewaLink, matadewaApiKey))
+            .setMinimumLevel(LogEventLevel.Verbose)
+            .createLogger());
+    }
+
     public void log(Object fn, Object response, Object id_controller, Object id_cust, Object request){
-        Log.setLogger(new LoggerConfiguration()
-        // .writeTo(coloredConsole())
-        .writeTo(seq(matadewaLink, matadewaApiKey))
-        .setMinimumLevel(LogEventLevel.Verbose)
-        .createLogger());
+      
 
         String nama = appname;  
         if(env.equals("dev")){
