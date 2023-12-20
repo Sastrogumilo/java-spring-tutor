@@ -31,15 +31,16 @@ public class LoggerService {
     private String appname;
 
     public LoggerService() {
+        
+    }
+
+    public void log(Object fn, Object response, Object id_controller, Object id_cust, Object request){
+
         Log .setLogger(new LoggerConfiguration()
             // .writeTo(coloredConsole())
             .writeTo(seq(matadewaLink, matadewaApiKey))
             .setMinimumLevel(LogEventLevel.Verbose)
             .createLogger());
-    }
-
-    public void log(Object fn, Object response, Object id_controller, Object id_cust, Object request){
-      
 
         String nama = appname;  
         if(env.equals("dev")){
